@@ -77,9 +77,9 @@ MISSING_COMMAND		= "MISSING_COMMAND"
 
 class Framework():
 	def __init__( self: Framework):
-		self.command_registry		= {}
-		self.command_list			= []
-		self.sub_command_dict		= {}
+		self.command_registry: dict[ str, Callable[ [ str], None]]		= {}
+		self.command_list: list[int]									= []
+		self.sub_command_dict: dict[ str, Callable[ [ str], None]]		= {}
 
 	def register_commands( self: Framework, registry: dict[ str, Callable[ [ str], None]]):
 		for (command, action) in registry.items():
@@ -101,7 +101,7 @@ class Framework():
 			self.sub_command_dict[ words[0]].append( words[1])
 	#end def
 	
-	def parse_line( self: Framework, line: str) -> (str, str, str, str):
+	def parse_line( self: Framework, line: str) -> tuple[str, str, str, str]:
 		command: str		= ""
 		sub_command: str	= ""
 		arguments: str		= ""
